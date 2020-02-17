@@ -19,7 +19,7 @@ public class PlayerServices {
   //
 
   final static String NO_WINS_MESSAGE = "You have not won a game, yet. But I *feel* your luck changing.";
-  final static String GAMES_PLAYED_FORMAT = "You have won an average of %.1f%% of this session's %d game.";
+  final static String GAMES_PLAYED_FORMAT = "You have won an average of %.1f%% of this session's %d games.";
 
   //
   // Attributes
@@ -29,6 +29,8 @@ public class PlayerServices {
   private GuessGame game;
   // The gameCenter provides sitewide features for all the games and players.
   private final GameCenter gameCenter;
+  private int totalWins;
+  private int totalGames;
 
   /**
    * Construct a new {@Linkplain PlayerServices} but wait for the player to want to start a game.
@@ -71,8 +73,10 @@ public class PlayerServices {
   public synchronized GuessResult makeGuess(int guess) {
     GuessResult result = game.makeGuess(guess);
     if (game.isFinished()) {
+        totalGames++;
         gameCenter.gameFinished();
     }
+    if (result.equals(GuessResult.WON)){totalWins++;}
     return result;
   }
 
@@ -109,6 +113,14 @@ public class PlayerServices {
    */
   public int guessesLeft() {
     return game.guessesLeft();
+  }
+
+  public synchronized String getGameStatsMessage() {
+    if (totalWins == 0) {
+      return NO_WINS_MESSAGE;
+    } else {
+      return String.format(GAMES_PLAYED_FORMAT, (((double)totalWins/totalGames)*100), totalGames);
+    }
   }
 
 }

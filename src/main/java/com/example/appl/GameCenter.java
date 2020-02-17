@@ -20,7 +20,8 @@ public class GameCenter {
   //
 
   // Output strings made public for unit test access
-  public final static String NO_GAMES_MESSAGE = "No games have been played so far.";
+  //public final static String NO_GAMES_MESSAGE = "No games have been played so far.";
+  public final static String NO_GAMES_MESSAGE = "No game stats yet";
   public final static String ONE_GAME_MESSAGE = "One game has been played so far.";
   public final static String GAMES_PLAYED_FORMAT = "There have been %d games played.";
 
