@@ -1,5 +1,7 @@
 package com.example.model;
 
+import com.example.appl.GameCenter;
+
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -126,6 +128,7 @@ public class GuessGame {
       final boolean isCorrect = myGuess == numberToGuess;
       if (isCorrect) {
         thisResult = GuessResult.WON;
+        GameCenter.addWin();
       } else if (hasMoreGuesses()) {
         thisResult = GuessResult.WRONG;
       } else {

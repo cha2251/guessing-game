@@ -29,7 +29,7 @@ public class GameCenter {
   //
 
   private int totalGames = 0;
-
+  private static int wonGames = 0;
   //
   // Constructors
   //
@@ -68,6 +68,11 @@ public class GameCenter {
     synchronized (this) {  // protect the critical code
       totalGames++;
     }
+
+  }
+
+  public static void addWin(){
+    wonGames++;
   }
 
   /**
@@ -77,12 +82,16 @@ public class GameCenter {
    *   The message to the user about global game statistics.
    */
   public synchronized String getGameStatsMessage() {
+    String s = "";
     if (totalGames > 1) {
-      return String.format(GAMES_PLAYED_FORMAT, totalGames);
+      s = String.format(GAMES_PLAYED_FORMAT, totalGames);
     } else if (totalGames == 1) {
-      return ONE_GAME_MESSAGE;
+      s = ONE_GAME_MESSAGE;
     } else {
-      return NO_GAMES_MESSAGE;
+      s = NO_GAMES_MESSAGE;
     }
+    if (!s.equals(NO_GAMES_MESSAGE))
+    s+= "\nPlayers have won "+(int)(((double)wonGames/totalGames)*100)+"% of the games played.";
+    return s;
   }
 }
