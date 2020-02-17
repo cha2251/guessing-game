@@ -166,6 +166,10 @@ public class GuessGame {
     return howManyGuessesLeft;
   }
 
+  public int getNumberToGuess() {
+    return numberToGuess;
+  }
+
   /**
    * {@inheritDoc}
    */

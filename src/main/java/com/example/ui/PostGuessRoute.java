@@ -136,7 +136,13 @@ public class PostGuessRoute implements Route {
 
         case WRONG:
           vm.put(GetGameRoute.GUESSES_LEFT_ATTR, playerServices.guessesLeft());
-          mv = error(vm, BAD_GUESS);
+          String hint = "";
+          if (guess > playerServices.getNumberToGuess()){
+            hint = "The number is lower than your guess";
+          } else {
+            hint = "The number is higher than your guess";
+          }
+          mv = error(vm, BAD_GUESS+"\n"+hint);
           break;
 
         case WON:

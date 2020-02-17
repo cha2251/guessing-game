@@ -115,6 +115,10 @@ public class PlayerServices {
     return game.guessesLeft();
   }
 
+  public int getNumberToGuess() {
+    return game.getNumberToGuess();
+  }
+
   public synchronized String getGameStatsMessage() {
     if (totalWins == 0) {
       return NO_WINS_MESSAGE;
